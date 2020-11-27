@@ -8,7 +8,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Plongee {
-
+    
+        Set<Plongeur> participants = new HashSet<>();
+        Set<Licence> licences = new HashSet<>();
+        
 	public Site lieu;
 
 	public Moniteur chefDePalanquee;
@@ -28,8 +31,9 @@ public class Plongee {
 	}
 
 	public void ajouteParticipant(Plongeur participant) {
-		// TODO: Implémenter cette méthode
-		throw new UnsupportedOperationException("Pas encore implémenté");
+		if(!participants.contains(participant)){
+                participants.add(participant);
+                }
 	}
 
 	public LocalDate getDate() {
@@ -43,8 +47,13 @@ public class Plongee {
 	 * @return vrai si la plongée est conforme
 	 */
 	public boolean estConforme() {
-		// TODO: Implémenter cette méthode
-		throw new UnsupportedOperationException("Pas encore implémenté");
+		boolean conf = true;
+                for (Plongeur p : participants) {
+                    if (!p.licences.get(p.licences.size()-1).estValide(this.getDate())) {
+                        conf = false;
+                    }
+                }
+                return conf;
 	}
 
 }
